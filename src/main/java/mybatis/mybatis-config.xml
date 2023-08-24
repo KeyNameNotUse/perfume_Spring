@@ -16,6 +16,7 @@
 		<typeAlias type="model.Board" alias="board" />
 		<typeAlias type="model.BoardComment" alias="comment" />
 		<typeAlias type="model.ProdReview" alias="prodreview" />
+		<typeAlias type="model.Question" alias="question" />
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">

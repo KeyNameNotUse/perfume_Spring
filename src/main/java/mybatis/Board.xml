@@ -103,5 +103,10 @@
 	<select id="commentCountAdmin" parameterType="String" resultType="int">
 		select nvl(count(*),0) from boardcomment2
 	</select>
+	<insert id="insertQuestion" parameterType="question">
+		insert into question values
+		(questionseq.nextval,#{quesubjct},#{quetitle},#{quecontent},#{queimage,
+		jdbcType=VARCHAR},#{queanswer},sysdate)
+	</insert>
 
 </mapper>

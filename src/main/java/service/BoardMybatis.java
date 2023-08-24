@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import model.Board;
 import model.BoardComment;
+import model.Question;
 
 @Repository
 public class BoardMybatis {
@@ -99,4 +100,8 @@ public class BoardMybatis {
 		map.put("end", pageInt * limit);
 		return sqlSession.selectList(NS + "commentListAdmin", map);
 	}
+	public int insertQuestion(Question question) {
+		return sqlSession.insert(NS + "insertQuestion", question);
+	}
+
 }

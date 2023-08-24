@@ -11,7 +11,13 @@
 </head>
 <body>
 
+	<form action="${pageContext.request.contextPath}/board/questionPro"
+		name="p" method="POST">
+		<button></button>
+	</form>
+
 	<div class="container">
+	<form action="${pageContext.request.contextPath}/board/" name="q" method="POST">
 	<table class="table">
 		<thead>
 			<tr align="center">
@@ -34,6 +40,7 @@
 
 		</tbody>
 	</table>
+	</form>
 	</div>
 	
 

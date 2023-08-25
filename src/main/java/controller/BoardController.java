@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import model.Board;
 import model.BoardComment;
 import model.Member;
+import model.Question;
 import service.BoardMybatis;
 import service.MemberMybatis;
 
@@ -480,14 +481,49 @@ public class BoardController {
 	
 	
 	
-	//일대일 문의게시판
-	@RequestMapping("question")
-	public String question() {
+	
+	
+	
+	//일대일 문의게시판 첫화면
+	@RequestMapping("questionList")
+	public String questionList() {
 		
 		String id = (String) session.getAttribute("id");
-		
-		
-		return "board/question";
+		Member member = md.oneMember(id);
+
+		m.addAttribute("member", member);
+		return "board/questionList";
 	} //question end
+	
+	//일대일 문의글 작성폼
+	@RequestMapping("questionForm")
+	public String questionPro() {
+		
+		String id = (String) session.getAttribute("id");
+		Member member = md.oneMember(id);
+
+		m.addAttribute("member", member);
+		return "board/questionForm";
+	} //questionForm end	
+
+	//일대일 문의글 작성
+	@RequestMapping("questionPro")
+	public String questionPro(@RequestParam("f") MultipartFile multipartFile , Question question) {
+		
+		String id = (String) session.getAttribute("id");
+		String msg = "작성실패";
+		String url = "/board/questionList";
+		
+		int num = bd.insertQuestion(question);
+		if (num >0) {
+			msg="문의글 작성완료";
+			url="/board/questionList";
+		}
+		
+		m.addAttribute("msg", msg);
+		m.addAttribute("url", url);
+		return "alert";
+	} //questionPro end		
+	
 
 } // BoardController End

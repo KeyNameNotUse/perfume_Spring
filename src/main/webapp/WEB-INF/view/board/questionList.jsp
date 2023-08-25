@@ -10,14 +10,19 @@
 <title>일대일 문의게시판</title>
 </head>
 <body>
-
-	<form action="${pageContext.request.contextPath}/board/questionPro"
-		name="p" method="POST">
-		<button></button>
-	</form>
-
+	
+	<div class="container input-group mb-3">
+		<button class="btn btn-outline-secondary" type="button"
+			onclick="location.href='${pageContext.request.contextPath}/board/questionForm'">
+			문의글 입력</button>
+	</div>
+	
+	<div class="container mb-5" align="center">
+	<p class="lead"><strong>${member.name}</strong>님 문의글을 작성해보세요
+		<br><small>주말 제외 평균 3일 이내에 답변이 달립니다</small></p>
+	</div>
+	
 	<div class="container">
-	<form action="${pageContext.request.contextPath}/board/" name="q" method="POST">
 	<table class="table">
 		<thead>
 			<tr align="center">
@@ -40,7 +45,6 @@
 
 		</tbody>
 	</table>
-	</form>
 	</div>
 	
 

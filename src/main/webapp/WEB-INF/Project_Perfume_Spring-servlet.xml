@@ -130,6 +130,9 @@
 			<mvc:mapping path="/order/orderConfirm" />
 			<mvc:mapping path="/board/myComment" />
 			<mvc:mapping path="/board/question" />
+			<mvc:mapping path="/board/questionList" />
+			<mvc:mapping path="/board/questionForm" />
+			<mvc:mapping path="/board/questionPro" />
 			<ref bean="login"/>
 		</mvc:interceptor>	
 	</mvc:interceptors>

@@ -11,12 +11,6 @@
 </head>
 <body>
 	
-	<div class="container input-group mb-3">
-		<button class="btn btn-outline-secondary" type="button"
-			onclick="location.href='${pageContext.request.contextPath}/board/questionForm'">
-			문의글 입력</button>
-	</div>
-	
 	<div class="container mb-5" align="center">
 	<p class="lead"><strong>${member.name}</strong>님 문의글을 작성해보세요
 		<br><small>주말 제외 평균 3일 이내에 답변이 달립니다</small></p>
@@ -46,6 +40,8 @@
 		</tbody>
 	</table>
 	</div>
+	
+
 	
 
 </body>

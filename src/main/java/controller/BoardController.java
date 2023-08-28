@@ -482,18 +482,25 @@ public class BoardController {
 	
 	
 	
-	
-	
 	//일대일 문의게시판 첫화면
+	@RequestMapping("question")
+	public String question() {
+		
+		String id = (String) session.getAttribute("id");
+
+		return "board/question";
+	} //question end
+	
+	//일대일 문의게시판 리스트
 	@RequestMapping("questionList")
-	public String questionList() {
+	public String questionList(Question question) {
 		
 		String id = (String) session.getAttribute("id");
 		Member member = md.oneMember(id);
 
 		m.addAttribute("member", member);
 		return "board/questionList";
-	} //question end
+	} //questionList end
 	
 	//일대일 문의글 작성폼
 	@RequestMapping("questionForm")
@@ -514,11 +521,20 @@ public class BoardController {
 		String msg = "작성실패";
 		String url = "/board/questionList";
 		
+		String selectSubject = request.getParameter("selectSubject");
+		question.setQuesubjct(selectSubject);
+		String title = request.getParameter("title");
+		question.setQuetitle(title);		
+		String content = request.getParameter("content");
+		question.setQuecontent(content);			
+		
+		
 		int num = bd.insertQuestion(question);
 		if (num >0) {
 			msg="문의글 작성완료";
 			url="/board/questionList";
 		}
+		System.out.println(question);
 		
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", url);

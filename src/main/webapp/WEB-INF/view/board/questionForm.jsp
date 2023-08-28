@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="container">
-		<form method="post" action="${pageContext.request.contextPath}/board/"
+		<form method="post" action="${pageContext.request.contextPath}/board/questionPro"
 		enctype="multipart/form-data" onsubmit="return blankchk();">
 		
 		
@@ -32,7 +32,7 @@
 				<p>작성자: ${member.name}</p>
 			</div>
 			<div class="mb-3">
-				<label for="subject">제목</label>
+				<label for="title">제목</label>
 				<input type="text" class="form-control" name="title" id="title">
 			</div>
 			<div class="mb-3">
@@ -50,8 +50,8 @@
 			</button>
 			
 			<button type="button" class="btn btn-outline-danger"
-			onclick="location.href='${pageContext.request.contextPath}/board/questionList'">
-				취소
+			onclick="location.href='${pageContext.request.contextPath}/home/index'">
+				홈으로 돌아가기
 			</button>
 			
 			</div>

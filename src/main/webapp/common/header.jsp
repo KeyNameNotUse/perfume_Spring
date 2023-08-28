@@ -64,7 +64,7 @@
           					</a>
           					<ul class="dropdown-menu">
             					<li><a class="dropdown-item" 
-            					href="${pageContext.request.contextPath}/board/questionList">일대일 문의게시판</a></li>
+            					href="${pageContext.request.contextPath}/board/question">일대일 문의게시판</a></li>
           					</ul>
         				</li>        				
         				<!-- 세션 id가 admin이면 MANAGEMENT를, 그 외에는 CART 페이지를 보여줌 -->

@@ -23,4 +23,5 @@
 	<mapping path="*/reviewEnroll/*" exclude="true" />
 	<mapping path="*/reviewUpdate" exclude="true" />
 	<mapping path="*/reviewDelete" exclude="true" />
+	<mapping path="*/question" exclude="true" />
 </sitemesh>

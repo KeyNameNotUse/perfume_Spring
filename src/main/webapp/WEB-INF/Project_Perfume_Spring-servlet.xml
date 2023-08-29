@@ -133,6 +133,7 @@
 			<mvc:mapping path="/board/questionList" />
 			<mvc:mapping path="/board/questionForm" />
 			<mvc:mapping path="/board/questionPro" />
+			<mvc:mapping path="/board/questionView" />
 			<ref bean="login"/>
 		</mvc:interceptor>	
 	</mvc:interceptors>

@@ -4,44 +4,45 @@ import java.util.Date;
 
 public class Question {
 	
-	private int quenum; //문의글 번호
-	private String quesubjct; //문의글 분류(상품/배송/주문및결제/회원/기타)
+	private int num; //문의글 번호
+	private String id; //아이디
+	private String quesubject; //문의글 분류(상품/배송/주문및결제/회원/기타)
 	private String quetitle; //문의글 제목
 	private String quecontent; //문의글 내용
 	private String queimage; //첨부 이미지
 	private int queanswer; //답변 유무 (1:유 2:무)
-	private Date queregdate; // 문의글 작성 날짜
+	private Date regdate; // 문의글 작성 날짜
 	
 	/*
 create table question(
-quenum int primary key,
-quesubjct varchar(50),
+num int primary key,
+id varchar(50),
+quesubject varchar(50),
 quetitle varchar(100),
 quecontent varchar(2000),
 queimage varchar(300),
 queanswer int,
-queregdate date);
+regdate date);
 create sequence questionseq;
 	
 	*/
-	
-	public int getQueanswer() {
-		return queanswer;
+	public int getNum() {
+		return num;
 	}
-	public void setQueanswer(int queanswer) {
-		this.queanswer = queanswer;
+	public void setNum(int num) {
+		this.num = num;
 	}
-	public int getQuenum() {
-		return quenum;
+	public String getId() {
+		return id;
 	}
-	public void setQuenum(int quenum) {
-		this.quenum = quenum;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getQuesubjct() {
-		return quesubjct;
+	public String getQuesubject() {
+		return quesubject;
 	}
-	public void setQuesubjct(String quesubjct) {
-		this.quesubjct = quesubjct;
+	public void setQuesubject(String quesubject) {
+		this.quesubject = quesubject;
 	}
 	public String getQuetitle() {
 		return quetitle;
@@ -61,20 +62,27 @@ create sequence questionseq;
 	public void setQueimage(String queimage) {
 		this.queimage = queimage;
 	}
-	public Date getQueregdate() {
-		return queregdate;
+	public int getQueanswer() {
+		return queanswer;
 	}
-	public void setQueregdate(Date queregdate) {
-		this.queregdate = queregdate;
+	public void setQueanswer(int queanswer) {
+		this.queanswer = queanswer;
+	}
+	public Date getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
 	}
 	@Override
 	public String toString() {
-		return "Question [quenum=" + quenum + ", quesubjct=" + quesubjct + ", quetitle=" + quetitle + ", quecontent="
-				+ quecontent + ", queimage=" + queimage + ", queanswer=" + queanswer + ", queregdate=" + queregdate
-				+ "]";
+		return "Question [num=" + num + ", id=" + id + ", quesubject=" + quesubject + ", quetitle=" + quetitle
+				+ ", quecontent=" + quecontent + ", queimage=" + queimage + ", queanswer=" + queanswer + ", regdate="
+				+ regdate + "]";
 	}
-
-
 	
 
+	
+	
+	
 }

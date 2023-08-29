@@ -105,8 +105,13 @@
 	</select>
 	<insert id="insertQuestion" parameterType="question">
 		insert into question values
-		(questionseq.nextval,#{quesubjct},#{quetitle},#{quecontent},#{queimage,
+		(questionseq.nextval,#{id},#{quesubject},#{quetitle},#{quecontent},#{queimage,
 		jdbcType=VARCHAR},#{queanswer},sysdate)
 	</insert>
-
+	<select id="questionListById" parameterType="String" resultType="question">                                 
+		select * from question where id = #{id} order by regdate desc
+	</select>
+	<select id="questionOne" parameterType="int" resultType="question">
+		select * from question where num = #{num}
+	</select>
 </mapper>

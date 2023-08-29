@@ -17,27 +17,38 @@
 	</div>
 	
 	<div class="container">
-	<table class="table">
+	<table class="table table-hover">
 		<thead>
 			<tr align="center">
 				<th scope="col" width="5%">No</th>
-				<th scope="col" width="7%">분류</th>
+				<th scope="col" width="10%">분류</th>
 				<th scope="col" width="30%">제목</th>
 				<th scope="col" width="10%">작성일</th>
 				<th scope="col" width="10%">답변 유무</th>
 			</tr>
 		</thead>
 
+
+<c:forEach var="q" items="${questionListById}">
 		<tbody>
 			<tr align="center">
 				<th scope="row">No</th>
-				<td>분류</td>
-				<td>제목</td>
-				<td><fmt:formatDate value="${regdate}" var="dateValue" pattern="yyyy-MM-dd HH:mm"/>${dateValue}</td>
+				
+				<c:if test="${q.quesubject eq 1}"><td>[상품]</td></c:if>
+				<c:if test="${q.quesubject eq 2}"><td>[배송]</td></c:if>
+				<c:if test="${q.quesubject eq 3}"><td>[주문및결제]</td></c:if>
+				<c:if test="${q.quesubject eq 4}"><td>[회원]</td></c:if>
+				<c:if test="${q.quesubject eq 5}"><td>[기타]</td></c:if>
+				
+				<td><a
+					href="${pageContext.request.contextPath}/board/questionView?num=${q.num}"
+					style="color: black;">${q.quetitle}</a></td>
+				<td><fmt:formatDate value="${q.regdate}" var="dateValue" pattern="yyyy-MM-dd HH:mm"/>${dateValue}</td>
 				<td>답변 유무</td>
 			</tr>
 
 		</tbody>
+</c:forEach>
 	</table>
 	</div>
 	

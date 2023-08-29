@@ -103,5 +103,12 @@ public class BoardMybatis {
 	public int insertQuestion(Question question) {
 		return sqlSession.insert(NS + "insertQuestion", question);
 	}
-
+	public List<Question> questionListById(String id) {                                     
+		Map map = new HashMap();
+		map.put("id", id);
+		return sqlSession.selectList(NS+"questionListById", id);
+	}
+	public Question questionOne(int num) {
+		return sqlSession.selectOne(NS+"questionOne",num);
+	}
 }

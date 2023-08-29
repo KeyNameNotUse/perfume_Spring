@@ -497,7 +497,11 @@ public class BoardController {
 		
 		String id = (String) session.getAttribute("id");
 		Member member = md.oneMember(id);
-
+		
+		List<Question> questionListById = new ArrayList<Question>();
+		questionListById = bd.questionListById(id);
+		
+		m.addAttribute("questionListById", questionListById);
 		m.addAttribute("member", member);
 		return "board/questionList";
 	} //questionList end
@@ -517,19 +521,37 @@ public class BoardController {
 	@RequestMapping("questionPro")
 	public String questionPro(@RequestParam("f") MultipartFile multipartFile , Question question) {
 		
+		String path = request.getServletContext().getRealPath("/") + "WEB-INF/view/board/images/"; // 사진 파일 경로
+
+		
+		String filename = " ";
+		if (!multipartFile.isEmpty()) {
+			File file = new File(path, multipartFile.getOriginalFilename());
+			filename = multipartFile.getOriginalFilename();
+			try {
+				multipartFile.transferTo(file);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		String id = (String) session.getAttribute("id");
 		String msg = "작성실패";
-		String url = "/board/questionList";
+		String url = "/board/questionList";		
 		
 		String selectSubject = request.getParameter("selectSubject");
-		question.setQuesubjct(selectSubject);
 		String title = request.getParameter("title");
-		question.setQuetitle(title);		
 		String content = request.getParameter("content");
-		question.setQuecontent(content);			
+					
+		question.setId(id);
+		question.setQuesubject(selectSubject);
+		question.setQuetitle(title);
+		question.setQuecontent(content);
+		question.setQueimage(filename);
 		
-		
-		int num = bd.insertQuestion(question);
+		int num = bd.insertQuestion(question); 
+	
 		if (num >0) {
 			msg="문의글 작성완료";
 			url="/board/questionList";
@@ -539,7 +561,21 @@ public class BoardController {
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", url);
 		return "alert";
-	} //questionPro end		
+	} //questionPro end	
+	
+	
+	// 문의글 자세히보기
+	@RequestMapping("questionView")
+	public String questionView(@RequestParam("num") int num) {
+		
+		Question question = bd.questionOne(num);
+		String id = (String) session.getAttribute("id");
+		Member member = md.oneMember(id);
+
+		m.addAttribute("member", member);		
+		m.addAttribute("question", question);
+		return "board/questionView";
+	} //questionView end
 	
 
 } // BoardController End

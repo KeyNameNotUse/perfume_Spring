@@ -37,7 +37,9 @@
 			</div>
 			<div class="mb-3">
 				<label for="content">내용</label>
-				<textarea class="form-control" rows="15" name="content" id="content"></textarea>
+				<textarea class="form-control" cols="30" rows="15" name="content" id="content"
+								
+				></textarea>
 			</div>
 			<div class="mb-3">
 				<label for="image">사진 첨부</label>

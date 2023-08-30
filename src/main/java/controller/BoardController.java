@@ -482,16 +482,14 @@ public class BoardController {
 	
 	
 	
-	//일대일 문의게시판 첫화면
+	//일대일 문의게시판 클릭시 첫화면
 	@RequestMapping("question")
 	public String question() {
-		
-		String id = (String) session.getAttribute("id");
 
 		return "board/question";
 	} //question end
 	
-	//일대일 문의게시판 리스트
+	//문의글 리스트
 	@RequestMapping("questionList")
 	public String questionList(Question question) {
 		
@@ -520,9 +518,8 @@ public class BoardController {
 	//일대일 문의글 작성
 	@RequestMapping("questionPro")
 	public String questionPro(@RequestParam("f") MultipartFile multipartFile , Question question) {
-		
-		String path = request.getServletContext().getRealPath("/") + "WEB-INF/view/board/images/"; // 사진 파일 경로
 
+		String path = request.getServletContext().getRealPath("/") + "WEB-INF/view/board/images/"; // 사진 파일 경로
 		
 		String filename = " ";
 		if (!multipartFile.isEmpty()) {
@@ -556,18 +553,16 @@ public class BoardController {
 			msg="문의글 작성완료";
 			url="/board/questionList";
 		}
-		System.out.println(question);
 		
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", url);
 		return "alert";
-	} //questionPro end	
-	
+	} //questionPro end
 	
 	// 문의글 자세히보기
 	@RequestMapping("questionView")
 	public String questionView(@RequestParam("num") int num) {
-		
+
 		Question question = bd.questionOne(num);
 		String id = (String) session.getAttribute("id");
 		Member member = md.oneMember(id);
@@ -577,5 +572,75 @@ public class BoardController {
 		return "board/questionView";
 	} //questionView end
 	
+	//문의글 삭제 폼
+	@RequestMapping("questionDeleteForm")
+	public String questionDeleteForm(@RequestParam("num") int num) {
 
+		m.addAttribute("num", num);
+		return "board/questionDeleteForm";
+	} //questionView end
+	
+	//문의글 삭제
+	@RequestMapping("questionDeletePro")
+	public String questionDeletePro(@RequestParam("num") int num) {
+		
+		String msg = " ";
+		String url = " ";
+		if (bd.questionDelete(num) > 0) {
+			msg = "게시글이 삭제 되었습니다.<br>문의글 리스트로 돌아갑니다";
+			url = "/board/questionList";
+		} else {
+			msg = "삭제 오류.<br>해당 문의글로 돌아갑니다.";
+			url = "/board/questionView?num=" + num;
+		}
+		m.addAttribute("msg", msg);
+		m.addAttribute("url", url);
+		return "alert";
+	} //questionDeletePro end	
+	
+	
+	
+
+
+	// 문의글관리(admin)
+	@RequestMapping("questionManagement")
+	public String questionManagement() {
+		
+		if (request.getParameter("pageNum") != null) /* pageNum을 넘겨 받음 */ {
+			session.setAttribute("pageNum", request.getParameter("pageNum"));
+		}
+		String pageNum = (String) session.getAttribute("pageNum");
+		if (pageNum == null)
+			pageNum = "1"; // 넘겨받은 pageNum이 없으면 1페이지로
+
+		int limit = 10; // 한 page 당 게시물 갯수
+		int pageInt = Integer.parseInt(pageNum); // page 번호
+
+		int questionCount = bd.questionCountAdmin(); // 전체 게시물 갯수
+		int boardNum = questionCount - ((pageInt - 1) * limit);
+
+		int bottomLine = 10;
+		int start = (pageInt - 1) / bottomLine * bottomLine + 1;
+		int end = start + bottomLine - 1;
+		int maxPage = (questionCount / limit) + (questionCount % limit == 0 ? 0 : 1);
+		if (end > maxPage)
+			end = maxPage;
+
+		List<Question> questionListAdmin = bd.questionListAdmin(pageInt, limit);
+
+		m.addAttribute("boardNum", boardNum);
+		m.addAttribute("pageInt", pageInt);
+		m.addAttribute("bottomLine", bottomLine);
+		m.addAttribute("start", start);
+		m.addAttribute("end", end);
+		m.addAttribute("maxPage", maxPage);
+		m.addAttribute("questionListAdmin", questionListAdmin);		
+		
+
+		return "board/questionManagement";
+	} //questionManagement end	
+
+	
+	
+	
 } // BoardController End

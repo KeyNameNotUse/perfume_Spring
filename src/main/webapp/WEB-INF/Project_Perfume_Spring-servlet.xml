@@ -99,6 +99,7 @@
 			<mvc:mapping path="/member/adminMemberDelete" />
 			<mvc:mapping path="/order/orderManagement" />
 			<mvc:mapping path="/order/orderStateUpdate" />
+			<mvc:mapping path="/board/questionManagement" />
 			<ref bean="admin"/>
 		</mvc:interceptor>
 		<mvc:interceptor>			
@@ -134,8 +135,11 @@
 			<mvc:mapping path="/board/questionForm" />
 			<mvc:mapping path="/board/questionPro" />
 			<mvc:mapping path="/board/questionView" />
+			<mvc:mapping path="/board/questionDeleteForm" />
+			<mvc:mapping path="/board/questionDeletePro" />
 			<ref bean="login"/>
 		</mvc:interceptor>	
+		
 	</mvc:interceptors>
 	<bean id="login" class="login.LoginUser" />
 	<bean id="admin" class="login.LoginAdmin" />

@@ -29,7 +29,7 @@
 			
 			
 			<div class="mb-3">			
-				<p>작성자: ${member.name}</p>
+				<p>작성자: ${member.id}</p>
 			</div>
 			<div class="mb-3">
 				<label for="title">제목</label>
@@ -37,9 +37,9 @@
 			</div>
 			<div class="mb-3">
 				<label for="content">내용</label>
-				<textarea class="form-control" cols="30" rows="15" name="content" id="content"
-								
-				></textarea>
+				<textarea class="form-control" cols="30" rows="10" name="content" id="content"
+				oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"' 
+        		style="resize: none; max-height: 300px; "></textarea>
 			</div>
 			<div class="mb-3">
 				<label for="image">사진 첨부</label>

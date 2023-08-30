@@ -62,10 +62,21 @@
           					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
            					Q&A
           					</a>
+          					<!-- admin일때는 문의글관리/회원일때는 일대일 문의게시판  -->
+          					<c:choose>
+          					<c:when test="${id != null && id.equals('admin')}">
           					<ul class="dropdown-menu">
             					<li><a class="dropdown-item" 
-            					href="${pageContext.request.contextPath}/board/question">일대일 문의게시판</a></li>
+            					href="${pageContext.request.contextPath}/board/questionManagement?pageNum=1">문의글 관리</a></li>
           					</ul>
+          					</c:when>
+          					<c:otherwise>
+           					<ul class="dropdown-menu">
+            					<li><a class="dropdown-item" 
+            					href="${pageContext.request.contextPath}/board/question">일대일 문의게시판</a></li>
+          					</ul>         					       					
+          					</c:otherwise>
+          					</c:choose>
         				</li>        				
         				<!-- 세션 id가 admin이면 MANAGEMENT를, 그 외에는 CART 페이지를 보여줌 -->
         				<c:choose>

@@ -114,4 +114,20 @@
 	<select id="questionOne" parameterType="int" resultType="question">
 		select * from question where num = #{num}
 	</select>
+	<delete id="questionDelete" parameterType="int">
+		delete from question where num = #{num}
+	</delete>	
+	<select id="questionListAdmin" parameterType="map" resultType="question">
+		select *
+		from (
+		select rownum rnum, a.* from
+		(select * from question
+		order by regdate desc) a) where rnum BETWEEN #{start}
+		and #{end}
+	</select>	
+	<select id="questionCountAdmin" parameterType="String" resultType="int">
+		select nvl(count(*),0) from question
+	</select>	
+	
+	
 </mapper>

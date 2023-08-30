@@ -111,4 +111,16 @@ public class BoardMybatis {
 	public Question questionOne(int num) {
 		return sqlSession.selectOne(NS+"questionOne",num);
 	}
+	public int questionDelete(int num) {
+		return sqlSession.delete(NS + "questionDelete", num);
+	}
+	public List<Question> questionListAdmin(int pageInt, int limit) {
+		Map map = new HashMap();
+		map.put("start", (pageInt - 1) * limit + 1);
+		map.put("end", pageInt * limit);
+		return sqlSession.selectList(NS + "questionListAdmin", map);
+	}
+	public int questionCountAdmin() {
+		return sqlSession.selectOne(NS + "questionCountAdmin");
+	}
 }

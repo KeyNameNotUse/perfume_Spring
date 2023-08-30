@@ -12,7 +12,6 @@
 <body>
 
 	<div class="container">
-
 			<div class="mb-3">
 			<label for="subject">카테고리</label>
 				<c:if test="${question.quesubject eq 1}"><input class="form-control" type="text" value="[상품]" disabled></c:if>
@@ -25,7 +24,7 @@
 			
 			<div class="mb-3">	
 				<label for="name">작성자</label>
-				<input type="text" class="form-control" value="${member.name}" disabled>
+				<input type="text" class="form-control" value="${member.id}" disabled>
 			</div>
 			<div class="mb-3">
 				<label for="title">제목</label>
@@ -33,9 +32,7 @@
 			</div>
 			<div class="mb-3">
 				<label for="content">내용</label>
-				<textarea class="form-control" rows="15" disabled
-
-				>${question.quecontent}</textarea>
+				<textarea class="form-control" rows="15" disabled>${question.quecontent}</textarea>
 			</div>
 			
 			<c:choose>	
@@ -48,12 +45,54 @@
 			<c:otherwise>
 			<div class="mb-3">
 			<img class="mb-3 text-center" alt="첨부사진"
-					src="${pageContext.request.contextPath}/view/board/images/${question.queimage}" />
+					src="${pageContext.request.contextPath}/view/board/images/${question.queimage}" width="50%"  />
 
 			</div></c:otherwise>	
-			</c:choose>			
+			</c:choose>
+			
+			
+			
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  	<button class="btn btn-outline-dark" type="button"
+  	onclick="location.href='${pageContext.request.contextPath}/board/questionDeleteForm?num=${question.num}'">
+  	문의글 삭제</button>
+</div>
+
 
 	</div>
+
+
+
+<%-- 
+<c:if test="${sessionScope.id eq 'admin'}">
+    <div style="display: flex; margin: 20px;">
+        <textarea cols="30" rows="1" name="text" 
+        oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"' 
+        style="resize: none; padding: 8px; max-height: 100px; margin-right: 10px;"></textarea>
+        <button onclick="clickBtn()" style="padding: 4px 6px; height: fit-content">클릭</button>
+    </div>
+    <div style="margin: 20px; width: 200px;">
+        작성한 내용:
+        <!-- white-space: pre-line; 을 사용해서 줄바꿈을 그대로 표시함 -->
+        <p style="white-space: pre-line; width: 300px;"></p>
+    </div>
+</c:if>
+
+
+    <script>
+        const textarea = document.querySelector("textarea");
+        const button = document.querySelector("button");
+        const text = document.querySelector("p");
+
+        function clickBtn() {
+            text.innerHTML = textarea.value;
+            textarea.value = '';
+            textarea.style.height = '';
+        }
+
+    </script>
+
+ --%>
 
 
 

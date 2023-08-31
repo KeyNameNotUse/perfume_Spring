@@ -498,7 +498,34 @@ public class BoardController {
 		
 		List<Question> questionListById = new ArrayList<Question>();
 		questionListById = bd.questionListById(id);
+
 		
+		if (request.getParameter("pageNum") != null) /* pageNum을 넘겨 받음 */ {
+			session.setAttribute("pageNum", request.getParameter("pageNum"));
+		}
+		String pageNum = (String) session.getAttribute("pageNum");
+		if (pageNum == null)
+			pageNum = "1"; // 넘겨받은 pageNum이 없으면 1페이지로
+
+		int limit = 10; // 한 page 당 게시물 갯수
+		int pageInt = Integer.parseInt(pageNum); // page 번호
+
+		int questionCount = bd.questionCountId(id); // 전체 게시물 갯수
+		int boardNum = questionCount - ((pageInt - 1) * limit);
+
+		int bottomLine = 10;
+		int start = (pageInt - 1) / bottomLine * bottomLine + 1;
+		int end = start + bottomLine - 1;
+		int maxPage = (questionCount / limit) + (questionCount % limit == 0 ? 0 : 1);
+		if (end > maxPage)
+			end = maxPage;		
+		
+		m.addAttribute("pageInt", pageInt);
+		m.addAttribute("bottomLine", bottomLine);
+		m.addAttribute("start", start);
+		m.addAttribute("end", end);
+		m.addAttribute("maxPage", maxPage);		
+		m.addAttribute("boardNum", boardNum);
 		m.addAttribute("questionListById", questionListById);
 		m.addAttribute("member", member);
 		return "board/questionList";
@@ -564,10 +591,17 @@ public class BoardController {
 	public String questionView(@RequestParam("num") int num) {
 
 		Question question = bd.questionOne(num);
-		String id = (String) session.getAttribute("id");
-		Member member = md.oneMember(id);
 
-		m.addAttribute("member", member);		
+		// questionView.jsp에서[돌아가기]버튼
+		if (request.getParameter("pageNum") != null) /* pageNum을 넘겨 받음 */ {
+			session.setAttribute("pageNum", request.getParameter("pageNum"));
+		}
+		String pageNum = (String) session.getAttribute("pageNum");
+		if (pageNum == null)
+			pageNum = "1"; // 넘겨받은 pageNum이 없으면 1페이지로		
+		int pageInt = Integer.parseInt(pageNum); // page 번호
+
+		m.addAttribute("pageInt", pageInt);			
 		m.addAttribute("question", question);
 		return "board/questionView";
 	} //questionView end
@@ -586,21 +620,27 @@ public class BoardController {
 		
 		String msg = " ";
 		String url = " ";
-		if (bd.questionDelete(num) > 0) {
-			msg = "게시글이 삭제 되었습니다.<br>문의글 리스트로 돌아갑니다";
-			url = "/board/questionList";
+		
+		String id = (String) session.getAttribute("id");
+		Question question = bd.questionOne(num);
+		//admin이 아니거나 세션아이디가 다르면 삭제불가
+		if (id.equals(question.getId()) || id.equals("admin")) {
+			if (bd.questionDelete(num) > 0) {
+				msg = "게시글이 삭제 되었습니다.<br>문의글 리스트로 돌아갑니다";
+				url = "/board/questionList";
+			} else {
+				msg = "삭제 오류.<br>해당 문의글로 돌아갑니다.";
+				url = "/board/questionView?num=" + num;
+			}
 		} else {
-			msg = "삭제 오류.<br>해당 문의글로 돌아갑니다.";
-			url = "/board/questionView?num=" + num;
+			msg = "해당 문의글을 작성한 회원만 삭제가능합니다.";
+			url = "/home/index";
 		}
+
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", url);
 		return "alert";
 	} //questionDeletePro end	
-	
-	
-	
-
 
 	// 문의글관리(admin)
 	@RequestMapping("questionManagement")
@@ -634,8 +674,7 @@ public class BoardController {
 		m.addAttribute("start", start);
 		m.addAttribute("end", end);
 		m.addAttribute("maxPage", maxPage);
-		m.addAttribute("questionListAdmin", questionListAdmin);		
-		
+		m.addAttribute("questionListAdmin", questionListAdmin);	
 
 		return "board/questionManagement";
 	} //questionManagement end	

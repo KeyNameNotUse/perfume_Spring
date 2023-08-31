@@ -24,7 +24,7 @@
 			
 			<div class="mb-3">	
 				<label for="name">작성자</label>
-				<input type="text" class="form-control" value="${member.id}" disabled>
+				<input type="text" class="form-control" value="${question.id}" disabled>
 			</div>
 			<div class="mb-3">
 				<label for="title">제목</label>
@@ -56,6 +56,13 @@
   	<button class="btn btn-outline-dark" type="button"
   	onclick="location.href='${pageContext.request.contextPath}/board/questionDeleteForm?num=${question.num}'">
   	문의글 삭제</button>
+  	
+  	<c:if test="${id eq 'admin'}">
+  	<button class="btn btn-outline-warning" type="button"
+  	onclick="location.href='${pageContext.request.contextPath}/board/questionList?pageNum=${pageInt}'">
+  	목록으로 돌아가기</button></c:if> 
+  	<!-- admin일때는 questionManagement로 돌아가게 만들기  -->
+  		
 </div>
 
 

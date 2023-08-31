@@ -32,7 +32,11 @@
 <c:forEach var="q" items="${questionListById}">
 		<tbody>
 			<tr align="center">
-				<th scope="row">No</th>				
+			
+				<c:set var="boardNum" value="${boardNum}"/>
+				<th scope="row">${boardNum}</th>
+				<c:set var="boardNum" value="${boardNum-1}"/>		
+			
 				<c:if test="${q.quesubject eq 1}"><td>[상품]</td></c:if>
 				<c:if test="${q.quesubject eq 2}"><td>[배송]</td></c:if>
 				<c:if test="${q.quesubject eq 3}"><td>[주문및결제]</td></c:if>
@@ -49,7 +53,36 @@
 	</table>
 	</div>
 	
+	<!-- 페이지 표시 -->
+	<br>
+	<div class="text-center">
+		<!-- 이전 버튼 -->
+		<c:if test="${start < bottomLine}">
+			<a href="#" class="btn btn-sm btn-outline-danger disabled">이전</a>
+		</c:if>
+		<c:if test="${start > bottomLine}">
+			<a
+				href="${pageContext.request.contextPath}/board/questionList?pageNum=${start-bottomLine+(bottomLine-1)}"          
+				class="btn btn-sm btn-outline-primary">이전</a> 					<!-- 1페이지 아니라 5페이지로 이동하게  -->         
+			</c:if>
 
+		<!-- 현재 페이지 표시 -->
+		<c:forEach var="p" begin="${start}" end="${end}">
+			<a
+				href="${pageContext.request.contextPath}/board/questionList?pageNum=${p}"
+				class="btn <c:if test="${pageInt==p}"> btn-sm btn-outline-secondary </c:if> ml-3 mr-3">${p}</a>
+		</c:forEach>
+
+		<!-- 다음 버튼 -->
+		<c:if test="${end >= maxPage}">
+			<a href="#" class="btn btn-sm btn-outline-danger disabled">다음</a>
+		</c:if>
+		<c:if test="${end <  maxPage}">
+			<a
+				href="${pageContext.request.contextPath}/board/questionList?pageNum=${start+bottomLine}"
+				class="btn btn-sm btn-outline-primary">다음</a>
+		</c:if>
+	</div>
 	
 
 </body>

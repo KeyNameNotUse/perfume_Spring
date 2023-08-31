@@ -123,4 +123,7 @@ public class BoardMybatis {
 	public int questionCountAdmin() {
 		return sqlSession.selectOne(NS + "questionCountAdmin");
 	}
+	public int questionCountId(String id) {
+		return sqlSession.selectOne(NS + "questionCountId",id);
+	}
 }

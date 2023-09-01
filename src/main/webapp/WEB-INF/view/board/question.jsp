@@ -24,7 +24,7 @@
 			onclick="location.href='${pageContext.request.contextPath}/board/questionForm'">문의글 입력</button>
 	
 	<button type="button" class="btn btn-outline-danger"
-			onclick="location.href='${pageContext.request.contextPath}/board/questionList'">문의글 리스트</button>	
+			onclick="location.href='${pageContext.request.contextPath}/board/questionList?pageNum=1'">문의글 리스트</button>	
 	
 	<button type="button" class="btn btn-outline-danger "
 			onclick="location.href='${pageContext.request.contextPath}/home/index'">홈으로 돌아가기</button>

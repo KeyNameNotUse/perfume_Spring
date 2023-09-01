@@ -57,50 +57,68 @@
   	onclick="location.href='${pageContext.request.contextPath}/board/questionDeleteForm?num=${question.num}'">
   	문의글 삭제</button>
   	
-  	<c:if test="${id eq 'admin'}">
-  	<button class="btn btn-outline-warning" type="button"
-  	onclick="location.href='${pageContext.request.contextPath}/board/questionList?pageNum=${pageInt}'">
-  	목록으로 돌아가기</button></c:if> 
-  	<!-- admin일때는 questionManagement로 돌아가게 만들기  -->
-  		
+
+<!-- admin일때는 questionManagement로 돌아가게 만들기, 아닐경우 questionList로 돌아가기  -->
+	<c:choose>
+	<c:when test="${id eq 'admin'}">
+  		<button class="btn btn-outline-warning" type="button"
+  		onclick="location.href='${pageContext.request.contextPath}/board/questionManagement?pageNum=${pageInt}'">
+  		목록으로 돌아가기</button>	</c:when>
+	<c:otherwise>
+  		<button class="btn btn-outline-warning" type="button"
+  		onclick="location.href='${pageContext.request.contextPath}/board/questionList?pageNum=${pageInt}'">
+  		목록으로 돌아가기</button>	</c:otherwise>
+	</c:choose>
+
 </div>
 
 
+
+<!-- 구분선  -->
+<br>
+<br>
+<hr role="diviner" />
+<br>
+<br>
 	</div>
 
 
 
-<%-- 
-<c:if test="${sessionScope.id eq 'admin'}">
-    <div style="display: flex; margin: 20px;">
-        <textarea cols="30" rows="1" name="text" 
+<!-- 관리자 답변 -->
+<div class="container border">
+<c:if test="${id eq 'admin'}">
+	<div class="mb-3 row">
+  		<textarea class="form-control " id="textarea" rows="3"
+  		cols="30" rows="1" name="text" 
         oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"' 
-        style="resize: none; padding: 8px; max-height: 100px; margin-right: 10px;"></textarea>
-        <button onclick="clickBtn()" style="padding: 4px 6px; height: fit-content">클릭</button>
-    </div>
-    <div style="margin: 20px; width: 200px;">
-        작성한 내용:
-        <!-- white-space: pre-line; 을 사용해서 줄바꿈을 그대로 표시함 -->
-        <p style="white-space: pre-line; width: 300px;"></p>
-    </div>
+        style="resize: none; padding: 8px; max-height: 300px; margin-right: 10px;"
+        placeholder="'관리자' 계정만 작성이 가능합니다"
+  		></textarea>
+   		<button class=" btn btn-outline-dark " 
+   		onclick="clickBtn()" style="margin-top: 10px;padding: 4px 6px; height: fit-content">
+   		답변 입력</button> 		
+	</div>
+ 	<div class="mb-3 row">
+		<label for="content">관리자 답변</label>
+		<textarea class="form-control" rows="15" style="resize: none"></textarea>
+	</div>
 </c:if>
+</div>
 
 
-    <script>
-        const textarea = document.querySelector("textarea");
-        const button = document.querySelector("button");
-        const text = document.querySelector("p");
 
-        function clickBtn() {
-            text.innerHTML = textarea.value;
-            textarea.value = '';
-            textarea.style.height = '';
-        }
+<script>
+const textarea = document.querySelector("textarea");
+const button = document.querySelector("button");
+const text = document.querySelector("p");
 
-    </script>
+function clickBtn() {
+	text.innerHTML = textarea.value;
+    textarea.value = '';
+    textarea.style.height = '';
+    }
 
- --%>
-
+</script>
 
 
 

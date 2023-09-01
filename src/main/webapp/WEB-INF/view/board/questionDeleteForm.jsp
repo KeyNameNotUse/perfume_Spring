@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,10 +28,23 @@
 				<button type="submit" class="btn btn-outline-danger">
 					삭제
 				</button>
+				
+				<!-- admin으로 접속했을경우, questionView가 아니라 qeustionManagement로 이동하기 -->
+				<c:choose>
+				 <c:when test="${id eq 'admin'}">
+					<button type="button" class="btn btn-outline-secondary"
+					onclick="location.href='${pageContext.request.contextPath}/board/questionManagement?num=${num}'">
+					취소
+					</button>			</c:when>
+				
+				<c:otherwise>
 				<button type="button" class="btn btn-outline-secondary"
 				onclick="location.href='${pageContext.request.contextPath}/board/questionView?num=${num}'">
 					취소
-				</button>
+				</button>				</c:otherwise>
+				</c:choose>
+
+				
 			</form>
 		</div>
 	</div>

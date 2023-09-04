@@ -131,5 +131,10 @@
 	<select id="questionCountId" parameterType="String" resultType="int">
 		select nvl(count(*),0) from question where id = #{id}
 	</select>	
+	<insert id="insertQuestionComment" parameterType="map">
+		insert into
+		questioncomment values
+		(questioncommentseq.nextval,#{num},#{content},sysdate)
+	</insert>	
 	
 </mapper>

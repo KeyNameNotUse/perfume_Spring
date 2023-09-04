@@ -24,6 +24,7 @@ import model.Board;
 import model.BoardComment;
 import model.Member;
 import model.Question;
+import model.QuestionComment;
 import service.BoardMybatis;
 import service.MemberMybatis;
 
@@ -533,7 +534,7 @@ public class BoardController {
 	
 	//일대일 문의글 작성폼
 	@RequestMapping("questionForm")
-	public String questionPro() {
+	public String questionForm() {
 		
 		String id = (String) session.getAttribute("id");
 		Member member = md.oneMember(id);
@@ -678,6 +679,7 @@ public class BoardController {
 
 		return "board/questionManagement";
 	} //questionManagement end	
+
 
 	
 	

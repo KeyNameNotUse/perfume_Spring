@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>문의글 관리</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
 
@@ -26,6 +27,7 @@
 				<th scope="col" width="30%">제목</th>
 				<th scope="col" width="10%">작성일</th>
 				<th scope="col" width="10%">답변 유무</th>
+				<th scope="col" width="10%">답변하기</th>
 			</tr>
 		</thead>
 
@@ -49,7 +51,13 @@
 					href="${pageContext.request.contextPath}/board/questionView?num=${q.num}"
 					style="color: black;">${q.quetitle}</a></td>
 				<td><fmt:formatDate value="${q.regdate}" var="dateValue" pattern="yyyy-MM-dd HH:mm"/>${dateValue}</td>
-				<td>답변 유무</td>
+				<td>
+					<i class="bi bi-x-circle"></i>
+					<i class="bi bi-suit-heart-fill"></i>
+				</td>
+				<td>	
+				<button class="btn btc-sm btn-outline-primary" disabled><i class="bi bi-suit-heart-fill"></i>답변완료</button>
+				</td>
 			</tr>
 		</tbody>
 </c:forEach>

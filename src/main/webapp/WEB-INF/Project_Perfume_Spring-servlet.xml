@@ -135,11 +135,10 @@
 			<mvc:mapping path="/board/questionForm" />
 			<mvc:mapping path="/board/questionPro" />
 			<mvc:mapping path="/board/questionView" />
-			<mvc:mapping path="/board/questionDeleteForm" />
+			<mvc:mapping path="/board/questionDeleteForm" />		
 			<mvc:mapping path="/board/questionDeletePro" />
 			<ref bean="login"/>
 		</mvc:interceptor>	
-		
 	</mvc:interceptors>
 	<bean id="login" class="login.LoginUser" />
 	<bean id="admin" class="login.LoginAdmin" />

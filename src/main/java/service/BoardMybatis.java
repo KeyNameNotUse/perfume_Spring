@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import model.Board;
 import model.BoardComment;
 import model.Question;
+import model.QuestionComment;
 
 @Repository
 public class BoardMybatis {
@@ -93,7 +94,6 @@ public class BoardMybatis {
 	public int commentCountAdmin() {
 		return sqlSession.selectOne(NS + "commentCountAdmin");
 	}
-
 	public List<BoardComment> commentListAdmin(int pageInt, int limit) {
 		Map map = new HashMap();
 		map.put("start", (pageInt - 1) * limit + 1);
@@ -126,4 +126,14 @@ public class BoardMybatis {
 	public int questionCountId(String id) {
 		return sqlSession.selectOne(NS + "questionCountId",id);
 	}
+	public int insertQuestionComment(String content, int num) {
+		Map map = new HashMap();
+		map.put("content", content);
+		map.put("num", num);
+		return sqlSession.insert(NS + "insertQuestionComment", map);
+	}	
+	
+	
+	
+	
 }

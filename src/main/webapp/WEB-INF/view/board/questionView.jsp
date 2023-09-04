@@ -11,6 +11,10 @@
 </head>
 <body>
 
+
+<form action="${pageContext.request.contextPath}/board/insertQuestionCommentPro" method="post">
+<input type="hidden" name="num" value="${question.num}">
+
 	<div class="container">
 			<div class="mb-3">
 			<label for="subject">카테고리</label>
@@ -26,6 +30,12 @@
 				<label for="name">작성자</label>
 				<input type="text" class="form-control" value="${question.id}" disabled>
 			</div>
+			<div class="mb-3">	
+				<label for="name">작성일</label>
+				<input type="text" class="form-control" 
+				<fmt:formatDate value="${question.regdate}" var="dateValue" pattern="yyyy-MM-dd HH:mm"/>
+				value="${dateValue}" disabled>
+			</div>			
 			<div class="mb-3">
 				<label for="title">제목</label>
 				<input type="text" class="form-control" value="${question.quetitle}" disabled>
@@ -65,7 +75,7 @@
   		onclick="location.href='${pageContext.request.contextPath}/board/questionManagement?pageNum=${pageInt}'">
   		목록으로 돌아가기</button>	</c:when>
 	<c:otherwise>
-  		<button class="btn btn-outline-warning" type="button"
+  		<button class="btn btn-outline-warning" type="button" id="button"
   		onclick="location.href='${pageContext.request.contextPath}/board/questionList?pageNum=${pageInt}'">
   		목록으로 돌아가기</button>	</c:otherwise>
 	</c:choose>
@@ -84,41 +94,31 @@
 
 
 
-<!-- 관리자 답변 -->
-<div class="container border">
+<!-- 관리자 답변 --> <!-- 답변용게시판따로만들기!!!!! -->
+<div class="container">
 <c:if test="${id eq 'admin'}">
 	<div class="mb-3 row">
   		<textarea class="form-control " id="textarea" rows="3"
-  		cols="30" rows="1" name="text" 
+  		cols="30" rows="1" name="textarea" 
         oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"' 
         style="resize: none; padding: 8px; max-height: 300px; margin-right: 10px;"
         placeholder="'관리자' 계정만 작성이 가능합니다"
   		></textarea>
-   		<button class=" btn btn-outline-dark " 
-   		onclick="clickBtn()" style="margin-top: 10px;padding: 4px 6px; height: fit-content">
-   		답변 입력</button> 		
+   		<input type="submit" class="btn btn-outline-dark" value="답변 입력"
+   		style="margin-top: 10px ;padding: 4px 6px; "> 
 	</div>
  	<div class="mb-3 row">
-		<label for="content">관리자 답변</label>
-		<textarea class="form-control" rows="15" style="resize: none"></textarea>
+		<textarea class="form-control" rows="15" id="text" style="resize: none" disabled></textarea>
+	</div>
+	<div class="mb-3 row">
+		<button class="btn btn-outline-danger">
+		답변 삭제</button>
 	</div>
 </c:if>
 </div>
 
+</form>
 
-
-<script>
-const textarea = document.querySelector("textarea");
-const button = document.querySelector("button");
-const text = document.querySelector("p");
-
-function clickBtn() {
-	text.innerHTML = textarea.value;
-    textarea.value = '';
-    textarea.style.height = '';
-    }
-
-</script>
 
 
 

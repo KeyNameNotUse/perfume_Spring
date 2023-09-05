@@ -11,13 +11,34 @@
 </head>
 <body>
 
-
-
 	<div class="container mb-5" align="center">
 	<h3> 문의글 관리 페이지</h3>
 	</div>
-	
+
 	<div class="container">
+
+	<!-- 문의글 분류 선택하기  -->
+	<div class="btn-group">
+		<button class="btn btn-outline-dark btn-sm" type="button" 
+		onclick="location.href='${pageContext.request.contextPath}/board/questionManagement?selectedOne=${quesubject}" >
+		연습</button>
+	</div>	
+	
+  		<button class="btn btn-dark dropdown-toggle" type="button" 
+  		id="dropdownMenu" data-bs-auto-close="true" 
+  		data-bs-toggle="dropdown" aria-expanded="false">
+    	분류별 모아보기</button>
+  	<ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+    <li><a class="dropdown-item" href="#">[상품]</a></li>
+    <li><a class="dropdown-item" href="#">[배송]</a></li>
+    <li><a class="dropdown-item" href="#">[주문및결제]</a></li>
+    <li><a class="dropdown-item" href="#">[회원]</a></li>
+    <li><a class="dropdown-item" href="#">[기타]</a></li>
+  	</ul>
+
+	
+	
+	
 	<table class="table table-hover">
 		<thead>
 			<tr align="center">
@@ -27,7 +48,7 @@
 				<th scope="col" width="30%">제목</th>
 				<th scope="col" width="10%">작성일</th>
 				<th scope="col" width="10%">답변 유무</th>
-				<th scope="col" width="10%">답변하기</th>
+				<th scope="col" width="10%">답변</th>
 			</tr>
 		</thead>
 
@@ -35,12 +56,12 @@
 <c:forEach var="q" items="${questionListAdmin}">
 		<tbody>
 			<tr align="center">
-			
+
 				<c:set var="boardNum" value="${boardNum}"/>
 				<th scope="row">${boardNum}</th>				
 				<c:set var="boardNum" value="${boardNum-1}"/>
 						
-				<c:if test="${q.quesubject eq 1}"><td>[상품]</td></c:if>
+				<c:if test="${q.quesubject eq 1}"><td>[상품]</td></c:if> 
 				<c:if test="${q.quesubject eq 2}"><td>[배송]</td></c:if>
 				<c:if test="${q.quesubject eq 3}"><td>[주문및결제]</td></c:if>
 				<c:if test="${q.quesubject eq 4}"><td>[회원]</td></c:if>

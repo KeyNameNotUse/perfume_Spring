@@ -669,6 +669,19 @@ public class BoardController {
 
 		List<Question> questionListAdmin = bd.questionListAdmin(pageInt, limit);
 
+		Question question = new Question();
+		System.out.println(question+"  question");
+		String q = question.getQuesubject();
+
+		System.out.println(q+"  q");
+		List<Question> pp = bd.questionSubjectOne(q);
+		m.addAttribute("pp", pp);
+
+		
+		
+		
+		
+		
 		m.addAttribute("boardNum", boardNum);
 		m.addAttribute("pageInt", pageInt);
 		m.addAttribute("bottomLine", bottomLine);

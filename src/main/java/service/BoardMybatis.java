@@ -126,14 +126,14 @@ public class BoardMybatis {
 	public int questionCountId(String id) {
 		return sqlSession.selectOne(NS + "questionCountId",id);
 	}
-	public int insertQuestionComment(String content, int num) {
-		Map map = new HashMap();
-		map.put("content", content);
-		map.put("num", num);
-		return sqlSession.insert(NS + "insertQuestionComment", map);
-	}	
+	public List<Question> questionSubjectOne(String quesubject){
+		return sqlSession.selectList(NS +"questionSubjectOne", quesubject);
+	}
 	
 	
 	
+	
+	
+
 	
 }

@@ -130,11 +130,12 @@
 	</select>	
 	<select id="questionCountId" parameterType="String" resultType="int">
 		select nvl(count(*),0) from question where id = #{id}
-	</select>	
-	<insert id="insertQuestionComment" parameterType="map">
-		insert into
-		questioncomment values
-		(questioncommentseq.nextval,#{num},#{content},sysdate)
-	</insert>	
+	</select>
+	<select id="questionSubjectOne" parameterType="String" resultType="question">
+		select * from question where quesubject = #{quesubject} order by regdate desc
+	</select>
+	
+	
+
 	
 </mapper>

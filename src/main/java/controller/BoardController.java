@@ -668,19 +668,19 @@ public class BoardController {
 			end = maxPage;
 
 		List<Question> questionListAdmin = bd.questionListAdmin(pageInt, limit);
-
-		Question question = new Question();
-		System.out.println(question+"  question");
-		String q = question.getQuesubject();
-
-		System.out.println(q+"  q");
-		List<Question> pp = bd.questionSubjectOne(q);
-		m.addAttribute("pp", pp);
-
 		
 		
-		
-		
+		//분류모아보기
+		List<Question> questionNumOne = bd.questionNumOne("1");
+		List<Question> questionNumTwo = bd.questionNumTwo("2");
+		List<Question> questionNumThree = bd.questionNumThree("3");
+		List<Question> questionNumFour = bd.questionNumFour("4");
+		List<Question> questionNumFive = bd.questionNumFive("5");
+		m.addAttribute("questionNumOne", questionNumOne);
+		m.addAttribute("questionNumTwo", questionNumTwo);
+		m.addAttribute("questionNumThree", questionNumThree);
+		m.addAttribute("questionNumFour", questionNumFour);
+		m.addAttribute("questionNumFive", questionNumFive);
 		
 		m.addAttribute("boardNum", boardNum);
 		m.addAttribute("pageInt", pageInt);

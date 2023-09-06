@@ -131,9 +131,22 @@
 	<select id="questionCountId" parameterType="String" resultType="int">
 		select nvl(count(*),0) from question where id = #{id}
 	</select>
-	<select id="questionSubjectOne" parameterType="String" resultType="question">
+	<select id="questionNumOne" parameterType="String" resultType="question">
 		select * from question where quesubject = #{quesubject} order by regdate desc
-	</select>
+	</select>	
+	<select id="questionNumTwo" parameterType="String" resultType="question">
+		select * from question where quesubject = #{quesubject} order by regdate desc
+	</select>	
+	<select id="questionNumThree" parameterType="String" resultType="question">
+		select * from question where quesubject = #{quesubject} order by regdate desc
+	</select>	
+	<select id="questionNumFour" parameterType="String" resultType="question">
+		select * from question where quesubject = #{quesubject} order by regdate desc
+	</select>	
+	<select id="questionNumFive" parameterType="String" resultType="question">
+		select * from question where quesubject = #{quesubject} order by regdate desc
+	</select>	
+
 	
 	
 

@@ -16,29 +16,37 @@
 	</div>
 
 	<div class="container">
-
+	
 	<!-- 문의글 분류 선택하기  -->
-	<div class="btn-group">
-		<button class="btn btn-outline-dark btn-sm" type="button" 
-		onclick="location.href='${pageContext.request.contextPath}/board/questionManagement?selectedOne=${quesubject}" >
-		연습</button>
+	
+	<div class="d-flex justify-content-center">
+	<div>
+		<button class="btn btn-outline-dark btn-sm" type="button"
+		onclick="location.href='${pageContext.request.contextPath}/board/questionManagement?select=1'" >
+		[상품]</button>
 	</div>	
-	
-  		<button class="btn btn-dark dropdown-toggle" type="button" 
-  		id="dropdownMenu" data-bs-auto-close="true" 
-  		data-bs-toggle="dropdown" aria-expanded="false">
-    	분류별 모아보기</button>
-  	<ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-    <li><a class="dropdown-item" href="#">[상품]</a></li>
-    <li><a class="dropdown-item" href="#">[배송]</a></li>
-    <li><a class="dropdown-item" href="#">[주문및결제]</a></li>
-    <li><a class="dropdown-item" href="#">[회원]</a></li>
-    <li><a class="dropdown-item" href="#">[기타]</a></li>
-  	</ul>
+	<div>
+		<button class="btn btn-outline-dark btn-sm" type="button"
+		onclick="location.href='${pageContext.request.contextPath}/board/questionManagement?select=2'" >
+		[배송]</button>
+	</div>	
+	<div>
+		<button class="btn btn-outline-dark btn-sm" type="button"
+		onclick="location.href='${pageContext.request.contextPath}/board/questionManagement?select=3'" >
+		[주문및결제]</button>
+	</div>	
+	<div>
+		<button class="btn btn-outline-dark btn-sm" type="button"
+		onclick="location.href='${pageContext.request.contextPath}/board/questionManagement?select=4'" >
+		[회원]</button>
+	</div>	
+	<div>
+		<button class="btn btn-outline-dark btn-sm" type="button"
+		onclick="location.href='${pageContext.request.contextPath}/board/questionManagement?select=5'" >
+		[기타]</button>
+	</div>	
+	</div>
 
-	
-	
-	
 	<table class="table table-hover">
 		<thead>
 			<tr align="center">
@@ -67,7 +75,8 @@
 				<c:if test="${q.quesubject eq 4}"><td>[회원]</td></c:if>
 				<c:if test="${q.quesubject eq 5}"><td>[기타]</td></c:if>			
 				
-				<td>${q.id}</td>
+				<td>${q.id}
+				</td>
 				<td><a
 					href="${pageContext.request.contextPath}/board/questionView?num=${q.num}"
 					style="color: black;">${q.quetitle}</a></td>
@@ -83,6 +92,7 @@
 		</tbody>
 </c:forEach>
 	</table>
+	
 	</div>
 
 

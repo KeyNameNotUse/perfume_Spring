@@ -126,6 +126,27 @@ public class BoardMybatis {
 	public int questionCountId(String id) {
 		return sqlSession.selectOne(NS + "questionCountId",id);
 	}
+	public List<Question> questionNumOne(String quesubject) {
+		return sqlSession.selectList(NS + "questionNumOne", quesubject);
+	}
+	public List<Question> questionNumTwo(String quesubject) {
+		return sqlSession.selectList(NS + "questionNumTwo", quesubject);
+	}
+	public List<Question> questionNumThree(String quesubject) {
+		return sqlSession.selectList(NS + "questionNumThree", quesubject);
+	}
+	public List<Question> questionNumFour(String quesubject) {
+		return sqlSession.selectList(NS + "questionNumFour", quesubject);
+	}
+	public List<Question> questionNumFive(String quesubject) {
+		return sqlSession.selectList(NS + "questionNumFive", quesubject);
+	}
+	
+	
+	
+	
+	
+	
 	public List<Question> questionSubjectOne(String quesubject){
 		return sqlSession.selectList(NS +"questionSubjectOne", quesubject);
 	}

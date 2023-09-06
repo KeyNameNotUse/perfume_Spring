@@ -17,36 +17,27 @@
 
 	<div class="container">
 	
-	<!-- 문의글 분류 선택하기  -->
-	
+	<!-- 문의글 분류 선택하기  -->	
 	<div class="d-flex justify-content-center">
 	<div>
 		<button class="btn btn-outline-dark btn-sm" type="button"
-		onclick="location.href='${pageContext.request.contextPath}/board/questionManagement?select=1'" >
-		[상품]</button>
-	</div>	
+		onclick="filterQuestionsByCategory('1')" >[상품]</button></div>	
 	<div>
 		<button class="btn btn-outline-dark btn-sm" type="button"
-		onclick="location.href='${pageContext.request.contextPath}/board/questionManagement?select=2'" >
-		[배송]</button>
-	</div>	
+		onclick="filterQuestionsByCategory('2')" >[배송]</button></div>	
 	<div>
 		<button class="btn btn-outline-dark btn-sm" type="button"
-		onclick="location.href='${pageContext.request.contextPath}/board/questionManagement?select=3'" >
-		[주문및결제]</button>
-	</div>	
+		onclick="filterQuestionsByCategory('3')" >[주문및결제]</button></div>	
 	<div>
 		<button class="btn btn-outline-dark btn-sm" type="button"
-		onclick="location.href='${pageContext.request.contextPath}/board/questionManagement?select=4'" >
-		[회원]</button>
-	</div>	
+		onclick="filterQuestionsByCategory('4')" >[회원]</button></div>	
 	<div>
 		<button class="btn btn-outline-dark btn-sm" type="button"
-		onclick="location.href='${pageContext.request.contextPath}/board/questionManagement?select=5'" >
-		[기타]</button>
-	</div>	
+		onclick="filterQuestionsByCategory('5')" >[기타]</button></div>	
 	</div>
 
+
+	<!-- 테이블 시작 -->
 	<table class="table table-hover">
 		<thead>
 			<tr align="center">
@@ -63,7 +54,7 @@
 
 <c:forEach var="q" items="${questionListAdmin}">
 		<tbody>
-			<tr align="center">
+			<tr align="center" class="question-item" data-quesubject="${q.quesubject}">
 
 				<c:set var="boardNum" value="${boardNum}"/>
 				<th scope="row">${boardNum}</th>				
@@ -92,6 +83,7 @@
 		</tbody>
 </c:forEach>
 	</table>
+	<!-- 테이블 끝 -->	
 	
 	</div>
 
@@ -126,7 +118,22 @@
 				class="btn btn-sm btn-outline-primary">다음</a>
 		</c:if>
 	</div>
-
+	
+	
+	
+<script>
+function filterQuestionsByCategory(category) {
+    var questionItems = document.querySelectorAll('.question-item');
+    
+    questionItems.forEach(function(item) {
+        if (category === 'all' || item.getAttribute('data-quesubject') === category) {
+            item.style.display = 'table-row'; // 해당 카테고리의 질문만 보이게 함
+        } else {
+            item.style.display = 'none'; // 다른 카테고리의 질문은 숨김
+        }
+    });
+}
+</script>
 
 </body>
 </html>

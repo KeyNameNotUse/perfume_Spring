@@ -131,22 +131,17 @@
 	<select id="questionCountId" parameterType="String" resultType="int">
 		select nvl(count(*),0) from question where id = #{id}
 	</select>
-	<select id="questionNumOne" parameterType="String" resultType="question">
-		select * from question where quesubject = #{quesubject} order by regdate desc
-	</select>	
-	<select id="questionNumTwo" parameterType="String" resultType="question">
-		select * from question where quesubject = #{quesubject} order by regdate desc
-	</select>	
-	<select id="questionNumThree" parameterType="String" resultType="question">
-		select * from question where quesubject = #{quesubject} order by regdate desc
-	</select>	
-	<select id="questionNumFour" parameterType="String" resultType="question">
-		select * from question where quesubject = #{quesubject} order by regdate desc
-	</select>	
-	<select id="questionNumFive" parameterType="String" resultType="question">
-		select * from question where quesubject = #{quesubject} order by regdate desc
-	</select>	
-
+	<insert id="insertQuestionComment" parameterType="map">
+		insert into
+		questioncomment values
+		(questioncommentseq.nextval,#{num},#{content},sysdate)
+	</insert>
+	<select id="questioncommentByNum" parameterType="int" resultType="questioncomment">                                 
+		select * from questioncomment where num = #{num} order by regdate desc
+	</select>
+<!-- 	<select id="questioncommentList" parameterType="" resultType="questioncomment">
+		select * from questioncomment
+	</select> -->
 	
 	
 

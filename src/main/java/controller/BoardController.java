@@ -576,6 +576,7 @@ public class BoardController {
 		question.setQueimage(filename);
 		
 		int num = bd.insertQuestion(question); 
+		System.out.println(question);
 	
 		if (num >0) {
 			msg="문의글 작성완료";
@@ -601,7 +602,11 @@ public class BoardController {
 		if (pageNum == null)
 			pageNum = "1"; // 넘겨받은 pageNum이 없으면 1페이지로		
 		int pageInt = Integer.parseInt(pageNum); // page 번호
-
+		
+		//답변내용출력
+		int dd = bd.questionOne(num).getNum();
+		List<QuestionComment> qc = bd.questioncommentByNum(dd);	
+		m.addAttribute("qc", qc);
 		m.addAttribute("pageInt", pageInt);			
 		m.addAttribute("question", question);
 		return "board/questionView";
@@ -668,20 +673,20 @@ public class BoardController {
 			end = maxPage;
 
 		List<Question> questionListAdmin = bd.questionListAdmin(pageInt, limit);
+
+		//답변유무확인
+		int boardnum = 0;
+		List<QuestionComment> chk = new ArrayList();
+		for (int i = 0; i < questionListAdmin.size(); i++) {
+			boardnum = questionListAdmin.get(i).getNum();
+//			Question question = bd.questionOne(boardnum);
+//			List.add(question);
+			List<QuestionComment> b = bd.questioncommentByNum(boardnum);
+			chk.addAll(b);		
+		}		
+		System.out.println(chk);
 		
-		
-		//분류모아보기
-		List<Question> questionNumOne = bd.questionNumOne("1");
-		List<Question> questionNumTwo = bd.questionNumTwo("2");
-		List<Question> questionNumThree = bd.questionNumThree("3");
-		List<Question> questionNumFour = bd.questionNumFour("4");
-		List<Question> questionNumFive = bd.questionNumFive("5");
-		m.addAttribute("questionNumOne", questionNumOne);
-		m.addAttribute("questionNumTwo", questionNumTwo);
-		m.addAttribute("questionNumThree", questionNumThree);
-		m.addAttribute("questionNumFour", questionNumFour);
-		m.addAttribute("questionNumFive", questionNumFive);
-		
+		m.addAttribute("chk", chk);
 		m.addAttribute("boardNum", boardNum);
 		m.addAttribute("pageInt", pageInt);
 		m.addAttribute("bottomLine", bottomLine);
@@ -692,7 +697,50 @@ public class BoardController {
 
 		return "board/questionManagement";
 	} //questionManagement end	
+	
+	// 관리자전용 문의글 답변페이지(admin)
+	@RequestMapping("questionCommentForm")
+	public String questionCommentForm(@RequestParam("num") int num) {
 
+		Question question = bd.questionOne(num);
+
+		// questionView.jsp에서[돌아가기]버튼
+		if (request.getParameter("pageNum") != null) /* pageNum을 넘겨 받음 */ {
+			session.setAttribute("pageNum", request.getParameter("pageNum"));
+		}
+		String pageNum = (String) session.getAttribute("pageNum");
+		if (pageNum == null)
+			pageNum = "1"; // 넘겨받은 pageNum이 없으면 1페이지로		
+		int pageInt = Integer.parseInt(pageNum); // page 번호	
+		
+		//답변내용출력
+		int dd = bd.questionOne(num).getNum();
+		List<QuestionComment> qc = bd.questioncommentByNum(dd);	
+		
+		m.addAttribute("qc", qc);
+		m.addAttribute("pageInt", pageInt);			
+		m.addAttribute("question", question);
+		return "board/questionCommentForm";
+	} //questionCommentForm end
+	
+	// 문의글 답변작성
+	@RequestMapping("insertQuestionCommentPro")
+	public String insertQuestionCommentPro(@RequestParam("num") int num) {
+		
+		String content = request.getParameter("textarea");
+		int que = bd.insertQuestionComment(content, num);
+		QuestionComment questioncomment = new QuestionComment();
+		questioncomment.setContent(content);
+		
+		String msg = "작성완료되었습니다.";
+		String url = "/board/questionCommentForm?num="+num;
+
+		m.addAttribute("msg", msg);
+		m.addAttribute("url", url);
+		return "alert";
+	} //insertQuestionCommentPro end	
+	
+	
 
 	
 	

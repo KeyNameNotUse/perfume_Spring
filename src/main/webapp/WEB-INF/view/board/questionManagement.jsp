@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
-
+<c:forEach var="list" items="${chk}">${list.content}</c:forEach>
 	<div class="container mb-5" align="center">
 	<h3> 문의글 관리 페이지</h3>
 	</div>
@@ -19,6 +19,9 @@
 	
 	<!-- 문의글 분류 선택하기  -->	
 	<div class="d-flex justify-content-center">
+	<div>
+		<button class="btn btn-outline-dark btn-sm" type="button"
+		onclick="filterQuestionsByCategory('all')" >[전체]</button></div>	
 	<div>
 		<button class="btn btn-outline-dark btn-sm" type="button"
 		onclick="filterQuestionsByCategory('1')" >[상품]</button></div>	
@@ -46,7 +49,6 @@
 				<th scope="col" width="10%">아이디</th>
 				<th scope="col" width="30%">제목</th>
 				<th scope="col" width="10%">작성일</th>
-				<th scope="col" width="10%">답변 유무</th>
 				<th scope="col" width="10%">답변</th>
 			</tr>
 		</thead>
@@ -66,19 +68,32 @@
 				<c:if test="${q.quesubject eq 4}"><td>[회원]</td></c:if>
 				<c:if test="${q.quesubject eq 5}"><td>[기타]</td></c:if>			
 				
-				<td>${q.id}
-				</td>
+				<td>${q.id}</td>
 				<td><a
-					href="${pageContext.request.contextPath}/board/questionView?num=${q.num}"
+					href="${pageContext.request.contextPath}/board/questionCommentForm?num=${q.num}"
 					style="color: black;">${q.quetitle}</a></td>
-				<td><fmt:formatDate value="${q.regdate}" var="dateValue" pattern="yyyy-MM-dd HH:mm"/>${dateValue}</td>
+				<td><fmt:formatDate value="${q.regdate}" var="dateValue" 
+					 pattern="yyyy-MM-dd HH:mm"/>${dateValue}</td>
 				<td>
-					<i class="bi bi-x-circle"></i>
-					<i class="bi bi-suit-heart-fill"></i>
-				</td>
-				<td>	
-				<button class="btn btc-sm btn-outline-primary" disabled><i class="bi bi-suit-heart-fill"></i>답변완료</button>
-				</td>
+				
+<%-- 				
+<c:forEach var="list" items="${List}">${list.num}				
+<c:choose>
+<c:when test="${list.content}">
+</c:when>
+<c:otherwise>
+
+</c:otherwise>
+</c:choose>
+</c:forEach>				
+		 --%>		
+				
+					<button class="btn btc-sm btn-outline-primary">
+					<i class="bi bi-suit-heart-fill"></i>답변완료</button></td>
+					
+					
+					
+					
 			</tr>
 		</tbody>
 </c:forEach>
@@ -126,8 +141,10 @@ function filterQuestionsByCategory(category) {
     var questionItems = document.querySelectorAll('.question-item');
     
     questionItems.forEach(function(item) {
-        if (category === 'all' || item.getAttribute('data-quesubject') === category) {
-            item.style.display = 'table-row'; // 해당 카테고리의 질문만 보이게 함
+        if (item.getAttribute('data-quesubject') === category) {
+            item.style.display = 'table-row';
+        } else if (category === 'all') {
+        	item.style.display = 'table-row'; 	
         } else {
             item.style.display = 'none'; // 다른 카테고리의 질문은 숨김
         }

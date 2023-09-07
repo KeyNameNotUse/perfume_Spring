@@ -126,30 +126,22 @@ public class BoardMybatis {
 	public int questionCountId(String id) {
 		return sqlSession.selectOne(NS + "questionCountId",id);
 	}
-	public List<Question> questionNumOne(String quesubject) {
-		return sqlSession.selectList(NS + "questionNumOne", quesubject);
+	public int insertQuestionComment(String content, int num) {
+		Map map = new HashMap();
+		map.put("content", content);
+		map.put("num", num);
+		return sqlSession.insert(NS + "insertQuestionComment", map);
 	}
-	public List<Question> questionNumTwo(String quesubject) {
-		return sqlSession.selectList(NS + "questionNumTwo", quesubject);
+	public List<QuestionComment> questioncommentByNum(int num) {                                     
+		Map map = new HashMap();
+		map.put("num", num);
+		return sqlSession.selectList(NS+"questioncommentByNum", num);
 	}
-	public List<Question> questionNumThree(String quesubject) {
-		return sqlSession.selectList(NS + "questionNumThree", quesubject);
-	}
-	public List<Question> questionNumFour(String quesubject) {
-		return sqlSession.selectList(NS + "questionNumFour", quesubject);
-	}
-	public List<Question> questionNumFive(String quesubject) {
-		return sqlSession.selectList(NS + "questionNumFive", quesubject);
-	}
+//	public List<QuestionComment> questioncommentList(){
+//		return sqlSession.selectList(NS+"questioncommentList");
+//	}
 	
-	
-	
-	
-	
-	
-	public List<Question> questionSubjectOne(String quesubject){
-		return sqlSession.selectList(NS +"questionSubjectOne", quesubject);
-	}
+
 	
 	
 	

@@ -25,4 +25,5 @@
 	<mapping path="*/reviewDelete" exclude="true" />
 	<mapping path="*/question" exclude="true" />
 	<mapping path="*/questionDeleteForm" exclude="true" />
+	<mapping path="*/questionCommentForm" exclude="true" />
 </sitemesh>

@@ -8,10 +8,30 @@
 <head>
 <meta charset="UTF-8">
 <title>문의글: ${question.num}</title>
+<!-- bootstrap link -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+	crossorigin="anonymous" />
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+	crossorigin="anonymous"></script>
 </head>
 <body>
 
+
+<form action="${pageContext.request.contextPath}/board/insertQuestionCommentPro" 
+									method="post" onsubmit="return checkForm()">
+<input type="hidden" name="num" value="${question.num}">
 	<div class="container">
+	<div class="container">
+	<h3 class="display-4 text-center m-5"> 관리자전용 문의글 답변 페이지 입니다. </h3>	</div>
+	<div class="row ">	
+	<div class="col">
+	
+	
 			<div class="mb-3">
 			<label for="subject">카테고리</label>
 				<c:if test="${question.quesubject eq 1}"><input class="form-control" type="text" value="[상품]" disabled></c:if>
@@ -19,7 +39,8 @@
 				<c:if test="${question.quesubject eq 3}"><input class="form-control" type="text" value="[주문및결제]" disabled></c:if>
 				<c:if test="${question.quesubject eq 4}"><input class="form-control" type="text" value="[회원]" disabled></c:if>
 				<c:if test="${question.quesubject eq 5}"><input class="form-control" type="text" value="[기타]" disabled></c:if>
-			</div>		
+			</div>
+			
 			
 			<div class="mb-3">	
 				<label for="name">작성자</label>
@@ -37,7 +58,7 @@
 			</div>
 			<div class="mb-3">
 				<label for="content">내용</label>
-				<textarea class="form-control" rows="10" disabled>${question.quecontent}</textarea>
+				<textarea class="form-control" rows="15" disabled>${question.quecontent}</textarea>
 			</div>
 			
 			<c:choose>	
@@ -51,6 +72,7 @@
 			<div class="mb-3">
 			<img class="mb-3 text-center" alt="첨부사진"
 					src="${pageContext.request.contextPath}/view/board/images/${question.queimage}" width="50%"  />
+
 			</div></c:otherwise>	
 			</c:choose>
 
@@ -73,34 +95,61 @@
 	</c:choose>
 
 </div>
+</div>
 
+
+
+<!-- 관리자 답변 -->
+<div class="col">
+
+<!-- 구분선  -->
+<hr role="diviner" />
+<br>
+<br>
+
+	<!-- 답변 입력칸 -->
+	<div class="mb-3 row">
+  		<textarea class="form-control " id="textarea" rows="5"
+  		cols="30" name="textarea" 
+        oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"' 
+        style="resize: none; padding: 8px; max-height: 300px; margin-right: 10px;"
+        placeholder="답변을 작성하세요"
+  		></textarea>
+  	<!-- 답변 입력 버튼 -->
+   		<input type="submit" class="btn btn-outline-dark" value="답변 입력"
+   		style="margin-top: 10px ;padding: 4px 6px; ">
+	</div>
+	<!-- 입력된 답변 출력 -->
+	<c:forEach var="qc" items="${qc}">
+ 	<div class="mb-3 row fst-italic">
+		<textarea class="form-control" rows="5" id="text" style="resize: none" disabled>${qc.content}</textarea>
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-1">
+		<fmt:formatDate value="${qc.regdate}" var="dateValue" pattern="yyyy-MM-dd HH:mm"/>${dateValue}</div>
+	</div>
+	</c:forEach>
+	<!-- 답변 삭제 버튼 -->
+	<div class="mb-3 row">
+		<button class="btn btn-outline-danger">답변 삭제</button>
+	</div>
+</div>
+</div>
 	<br>
 	<br>
 	<hr role="diviner" />
 	<br>
 	<br>
-	
 </div>
+</form>
 
 
-	
-	
-<!-- 답변 -->
-<c:forEach var="qc" items="${qc}">
-	<c:choose>
-	<c:when test="${not empty qc.content}">
-	
-	<div class="container fst-italic mb-3">
-	<textarea class="form-control" rows="5" id="text" style="resize: none" disabled>${qc.content}</textarea>
-	<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-1">
-	<fmt:formatDate value="${qc.regdate}" var="dateValue" pattern="yyyy-MM-dd HH:mm"/>${dateValue}
-	</div>
-	</div>
-	
-	</c:when>
-	<c:otherwise></c:otherwise>
-	</c:choose>
-</c:forEach>
 
+<script>
+function checkForm() {
+	if (document.getElementById('textarea').value.trim() == "") {
+		alert("입력을 완료하십시오")
+		return false;
+		} return true;
+	}
+	</script>
 </body>
 </html>

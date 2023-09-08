@@ -5,7 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -659,7 +663,7 @@ public class BoardController {
 		if (pageNum == null)
 			pageNum = "1"; // 넘겨받은 pageNum이 없으면 1페이지로
 
-		int limit = 10; // 한 page 당 게시물 갯수
+		int limit = 30; // 한 page 당 게시물 갯수
 		int pageInt = Integer.parseInt(pageNum); // page 번호
 
 		int questionCount = bd.questionCountAdmin(); // 전체 게시물 갯수
@@ -673,20 +677,12 @@ public class BoardController {
 			end = maxPage;
 
 		List<Question> questionListAdmin = bd.questionListAdmin(pageInt, limit);
-
-		//답변유무확인
-		int boardnum = 0;
-		List<QuestionComment> chk = new ArrayList();
-		for (int i = 0; i < questionListAdmin.size(); i++) {
-			boardnum = questionListAdmin.get(i).getNum();
-//			Question question = bd.questionOne(boardnum);
-//			List.add(question);
-			List<QuestionComment> b = bd.questioncommentByNum(boardnum);
-			chk.addAll(b);		
-		}		
-		System.out.println(chk);
 		
-		m.addAttribute("chk", chk);
+		//답변완료버튼,,
+		List<QuestionComment> yy = bd.questioncommentOne();	
+		System.out.println(yy);
+		
+		m.addAttribute("yy", yy);
 		m.addAttribute("boardNum", boardNum);
 		m.addAttribute("pageInt", pageInt);
 		m.addAttribute("bottomLine", bottomLine);

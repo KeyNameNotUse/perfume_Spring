@@ -142,14 +142,34 @@
 </form>
 
 
-
 <script>
-function checkForm() {
-	if (document.getElementById('textarea').value.trim() == "") {
-		alert("입력을 완료하십시오")
-		return false;
-		} return true;
-	}
-	</script>
+    var isCommentEntered = false; // 댓글 입력 여부를 저장하는 변수
+
+    //페이지 로드 시 실행되는 함수
+    window.onload = function() {
+        var content = document.getElementById('text');
+        if (content.textContent.trim() !== "") {
+            alert("답글이 이미 입력되었습니다.");
+            isCommentEntered = true; // 이미 댓글이 입력되었다고 표시
+        }
+    }
+
+    function checkForm() {
+        //이미 댓글이 입력되었다면 입력을 막음
+        if (isCommentEntered) {
+            alert("답글이 이미 입력되었습니다.");
+            return false;
+        }
+
+        //댓글입력하지않고 '답변입력'누르면 실행안되게.
+        if (document.getElementById('textarea').value.trim() == "") {
+            alert("입력을 완료하십시오");
+            return false;
+        }
+
+        return true; // 댓글 입력 및 빈 입력 상황이 아니면 제출 허용
+    }
+</script>
+
 </body>
 </html>

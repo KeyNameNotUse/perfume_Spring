@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
-<c:forEach var="list" items="${chk}">${list.content}</c:forEach>
+
 	<div class="container mb-5" align="center">
 	<h3> 문의글 관리 페이지</h3>
 	</div>
@@ -73,27 +74,15 @@
 					href="${pageContext.request.contextPath}/board/questionCommentForm?num=${q.num}"
 					style="color: black;">${q.quetitle}</a></td>
 				<td><fmt:formatDate value="${q.regdate}" var="dateValue" 
-					 pattern="yyyy-MM-dd HH:mm"/>${dateValue}</td>
-				<td>
-				
-<%-- 				
-<c:forEach var="list" items="${List}">${list.num}				
-<c:choose>
-<c:when test="${list.content}">
-</c:when>
-<c:otherwise>
+					 pattern="yyyy-MM-dd HH:mm"/>${dateValue}</td>					 
+	<!-- 답변이 이미 달링 문의글은 답변완료버튼 보이게  -->	
+				<td>	
+				<c:forEach var="yy" items="${yy}">				
+				<c:if test="${q.num eq yy.num }">
+					<button class="btn btn-sm btn-outline-primary" disabled>      
+					<i class="bi bi-suit-heart-fill"></i>답변완료</button></c:if>
+				</c:forEach></td>
 
-</c:otherwise>
-</c:choose>
-</c:forEach>				
-		 --%>		
-				
-					<button class="btn btc-sm btn-outline-primary">
-					<i class="bi bi-suit-heart-fill"></i>답변완료</button></td>
-					
-					
-					
-					
 			</tr>
 		</tbody>
 </c:forEach>

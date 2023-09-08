@@ -137,9 +137,11 @@ public class BoardMybatis {
 		map.put("num", num);
 		return sqlSession.selectList(NS+"questioncommentByNum", num);
 	}
-//	public List<QuestionComment> questioncommentList(){
-//		return sqlSession.selectList(NS+"questioncommentList");
-//	}
+	public List<QuestionComment> questioncommentOne() {
+		return sqlSession.selectList(NS+"questioncommentOne");
+	}
+
+
 	
 
 	

@@ -139,9 +139,10 @@
 	<select id="questioncommentByNum" parameterType="int" resultType="questioncomment">                                 
 		select * from questioncomment where num = #{num} order by regdate desc
 	</select>
-<!-- 	<select id="questioncommentList" parameterType="" resultType="questioncomment">
-		select * from questioncomment
-	</select> -->
+	<select id="questioncommentOne" parameterType="int" resultType="questioncomment">                                 
+		select * from questioncomment order by regdate desc
+	</select>
+
 	
 	
 

@@ -75,7 +75,7 @@
 					style="color: black;">${q.quetitle}</a></td>
 				<td><fmt:formatDate value="${q.regdate}" var="dateValue" 
 					 pattern="yyyy-MM-dd HH:mm"/>${dateValue}</td>					 
-	<!-- 답변이 이미 달링 문의글은 답변완료버튼 보이게  -->	
+	<!-- 답변이 이미 달린 문의글은 답변완료버튼 보이게  -->	
 				<td>	
 				<c:forEach var="yy" items="${yy}">				
 				<c:if test="${q.num eq yy.num }">

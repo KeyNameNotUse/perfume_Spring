@@ -737,6 +737,20 @@ public class BoardController {
 	} //insertQuestionCommentPro end	
 	
 	
+	// 문의글답변 삭제
+	@RequestMapping("questionCommentDeletePro")
+	public String questionCommentDeletePro(@RequestParam("num") int num) {
+		
+		
+		String msg="";
+		String url="";
+		
+		m.addAttribute("msg", msg);
+		m.addAttribute("url", url);
+		return "alert";
+	} //questionCommentDeletePro end	
+	
+	
 
 	
 	

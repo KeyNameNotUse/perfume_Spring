@@ -129,7 +129,8 @@
 	</c:forEach>
 	<!-- 답변 삭제 버튼 -->
 	<div class="mb-3 row">
-		<button class="btn btn-outline-danger">답변 삭제</button>
+		<button class="btn btn-outline-danger" type="submit"
+		onclick="location.href='${pageContext.request.contextPath}/board/questionCommentDeletePro">답변 삭제</button>
 	</div>
 </div>
 </div>

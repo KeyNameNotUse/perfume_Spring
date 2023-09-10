@@ -138,6 +138,7 @@
 			<mvc:mapping path="/board/questionDeleteForm" />		
 			<mvc:mapping path="/board/questionDeletePro" />
 			<mvc:mapping path="/board/insertQuestionCommentPro" />
+			<mvc:mapping path="/board/questionCommentDeletePro" />
 			<ref bean="login"/>
 		</mvc:interceptor>	
 	</mvc:interceptors>

@@ -142,7 +142,9 @@
 	<select id="questioncommentOne" parameterType="int" resultType="questioncomment">                                 
 		select * from questioncomment order by regdate desc
 	</select>
-
+	<delete id="questionCommentDelete" parameterType="int">
+		delete from questioncomment where ser = #{ser}
+	</delete>
 	
 	
 

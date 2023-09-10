@@ -523,8 +523,12 @@ public class BoardController {
 		int end = start + bottomLine - 1;
 		int maxPage = (questionCount / limit) + (questionCount % limit == 0 ? 0 : 1);
 		if (end > maxPage)
-			end = maxPage;		
+			end = maxPage;	
 		
+		//답변완료버튼,,
+		List<QuestionComment> yy = bd.questioncommentOne();	
+		
+		m.addAttribute("yy", yy);		
 		m.addAttribute("pageInt", pageInt);
 		m.addAttribute("bottomLine", bottomLine);
 		m.addAttribute("start", start);
@@ -739,11 +743,18 @@ public class BoardController {
 	
 	// 문의글답변 삭제
 	@RequestMapping("questionCommentDeletePro")
-	public String questionCommentDeletePro(@RequestParam("num") int num) {
-		
+	public String questionCommentDeletePro(@RequestParam("ser") int ser) {
 		
 		String msg="";
-		String url="";
+		String url="";		
+		int num = Integer.parseInt(request.getParameter("num"));
+		if (bd.questionCommentDelete(ser)>0) {
+			msg="삭제가 완료되었습니다.";
+			url="/board/questionCommentForm?num="+num;
+		} else {
+			msg="questioncomment 삭제 실패";
+			url="/board/questionCommentForm?num="+num;
+			}
 		
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", url);

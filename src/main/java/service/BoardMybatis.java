@@ -140,6 +140,9 @@ public class BoardMybatis {
 	public List<QuestionComment> questioncommentOne() {
 		return sqlSession.selectList(NS+"questioncommentOne");
 	}
+	public int questionCommentDelete(int ser) {
+		return sqlSession.delete(NS + "questionCommentDelete" , ser);
+	}
 
 
 	

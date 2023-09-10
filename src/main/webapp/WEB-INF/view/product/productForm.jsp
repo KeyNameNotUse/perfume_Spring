@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -10,7 +11,7 @@
 <body>
 
 <form action="${pageContext.request.contextPath}/product/productPro" enctype="multipart/form-data"  
-method="post" onsubmit="return blankchk();">
+method="post" id="productForm" onsubmit="return blankchk();">
 	<div  class="jumbotron">
 		<div class="container">
 			<h1 class="display-3">
@@ -33,14 +34,14 @@ method="post" onsubmit="return blankchk();">
 			<div class="form-group row">
 				<label class="col-sm-2">상품 가격</label>
 				<div class="com-sm-3">
-					<input type="number" id="price" name="price" class="form-control">
+					<input type="number" min="1" id="price" name="price" class="form-control">
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label class="col-sm-2">재고</label>
 				<div class="com-sm-3">
-					<input type="number" id="stock" name="stock" class="form-control">
+					<input type="number" min="1" id="stock" name="stock" class="form-control">
 				</div>
 			</div>
 			
@@ -62,7 +63,7 @@ method="post" onsubmit="return blankchk();">
 			
 			<div class="form-group row">
 				<label class="col-sm-2">설문정보1</label>
-				<select class="form-select required" name="prodans1" id="prodans1">
+				<select class="form-select required" name="prodans1" id="prodans1" onchange="prodansList(this.value);">
 				  <option value="" selected>설문정보1 선택</option>
 				  <option value="flower">꽃</option>
 				  <option value="fruit">과일</option>
@@ -108,7 +109,7 @@ method="post" onsubmit="return blankchk();">
 				
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-primary" >등록</button>
+					<button type="submit" class="btn btn-primary">등록</button>
 				</div>
 			</div>
 			
@@ -117,7 +118,6 @@ method="post" onsubmit="return blankchk();">
 
 <script>
 	<!-- 빈칸 체크 -->
-	
 	function blankchk() {
 		if(document.getElementById( 'name' ).value.trim() == "") {
 			alert("상품 이름은 필수 입력 값입니다.")
@@ -127,17 +127,9 @@ method="post" onsubmit="return blankchk();">
 			alert("상품 가격은 필수 입력 값입니다.")
 		  	return false;
 		}
-		if (document.getElementById( 'price' ).value < 1) {
-			alert("가격은 1원 이상이어야 합니다.")
-			return false;
-		}
 		if(document.getElementById( 'stock' ).value.trim() == "") {
 			alert("재고는 필수 입력 값입니다.")
 		  	return false;
-		}
-		if (document.getElementById( 'stock' ).value < 0) {
-			alert("재고는 0개 이상이어야 합니다.")
-			return false;
 		}
 		if(document.getElementById( 'prodans1' ).value.trim() == "") {
 			alert("설문정보1은 필수 입력 값입니다.")
@@ -155,6 +147,33 @@ method="post" onsubmit="return blankchk();">
 			alert("상품 상세정보 이미지는 필수 입력 값입니다.")
 		  	return false;
 		} else return true;
+	}
+	
+	function prodansList(prodans1) {
+		let f = document.getElementById( 'productForm' );
+		let opt = $("prodans2 option").length;
+		
+		if (prodans1 == "") {
+			num = new Array("설문정보2");
+			vnum = new Array("");
+		} else if (prodans1 == "flower") {
+			num = new Array("라일락", "시트러스", "라벤더", "장미");
+			vnum = new Array("lilac", "citrus", "lavender", "rose");
+		} else if (prodans1 == "fruit") {
+			num = new Array("복숭아", "체리", "딸기", "레몬");
+			vnum = new Array("peach", "cherry", "strawberry", "lemon");
+		} else if (prodans1 == "wood") {
+			num = new Array("샌달우드", "편백나무", "소나무", "보이드우드");
+			vnum = new Array("sandal", "pyeonbaeg", "sonamu", "void");
+		}
+		
+		for (let i = 0; i < num.length; i++) {
+			f.prodans2.options[0] = null;
+		}
+		
+		for (k = 0; k < num.length; k++) {
+			f.prodans2.options[k] = new Option(num[k], vnum[k])
+		}
 	}
 	
 </script>

@@ -46,7 +46,13 @@
 					href="${pageContext.request.contextPath}/board/questionView?num=${q.num}"
 					style="color: black;">${q.quetitle}</a></td>
 				<td><fmt:formatDate value="${q.regdate}" var="dateValue" pattern="yyyy-MM-dd HH:mm"/>${dateValue}</td>
-				<td>답변 유무</td>
+				<td>
+	<!-- 답변이 이미 달린 문의글은 답변완료버튼 보이게  -->		
+				<c:forEach var="yy" items="${yy}">				
+				<c:if test="${q.num eq yy.num }">
+					<button class="btn btn-sm btn-outline-primary" disabled>      
+					답변완료</button></c:if>
+				</c:forEach></td>
 			</tr>
 		</tbody>
 </c:forEach>

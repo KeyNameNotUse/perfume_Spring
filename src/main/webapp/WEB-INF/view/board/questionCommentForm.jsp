@@ -22,12 +22,9 @@
 <body>
 
 
-<form action="${pageContext.request.contextPath}/board/insertQuestionCommentPro" 
-									method="post" onsubmit="return checkForm()">
-<input type="hidden" name="num" value="${question.num}">
+
 	<div class="container">
-	<div class="container">
-	<h3 class="display-4 text-center m-5"> 관리자전용 문의글 답변 페이지 입니다. </h3>	</div>
+	<div class="container"><h3 class="display-4 text-center m-5"> 관리자전용 문의글 답변 페이지 입니다. </h3></div>
 	<div class="row ">	
 	<div class="col">
 	
@@ -107,6 +104,10 @@
 <br>
 <br>
 
+
+<form action="${pageContext.request.contextPath}/board/insertQuestionCommentPro" 
+									method="post" onsubmit="return checkForm()">							
+<input type="hidden" name="num" value="${question.num}">
 	<!-- 답변 입력칸 -->
 	<div class="mb-3 row">
   		<textarea class="form-control " id="textarea" rows="5"
@@ -119,19 +120,26 @@
    		<input type="submit" class="btn btn-outline-dark" value="답변 입력"
    		style="margin-top: 10px ;padding: 4px 6px; ">
 	</div>
+</form>
+
+<form action="${pageContext.request.contextPath}/board/questionCommentDeletePro" method="post" >
 	<!-- 입력된 답변 출력 -->
 	<c:forEach var="qc" items="${qc}">
+<input type="hidden" name="ser" value="${qc.ser}">
+<input type="hidden" name="num" value="${question.num}">	
  	<div class="mb-3 row fst-italic">
 		<textarea class="form-control" rows="5" id="text" style="resize: none" disabled>${qc.content}</textarea>
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-1">
 		<fmt:formatDate value="${qc.regdate}" var="dateValue" pattern="yyyy-MM-dd HH:mm"/>${dateValue}</div>
 	</div>
 	</c:forEach>
-	<!-- 답변 삭제 버튼 -->
+	<!-- 답변 삭제 버튼 -->	
 	<div class="mb-3 row">
-		<button class="btn btn-outline-danger" type="submit"
-		onclick="location.href='${pageContext.request.contextPath}/board/questionCommentDeletePro">답변 삭제</button>
+		<button class="btn btn-outline-danger" type="submit">답변 삭제</button>
 	</div>
+</form>	
+	
+	
 </div>
 </div>
 	<br>
@@ -140,7 +148,7 @@
 	<br>
 	<br>
 </div>
-</form>
+
 
 
 <script>

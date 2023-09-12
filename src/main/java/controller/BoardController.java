@@ -748,7 +748,7 @@ public class BoardController {
 		String msg="";
 		String url="";		
 		int num = Integer.parseInt(request.getParameter("num"));
-		if (bd.questionCommentDelete(ser)>0) {
+		if (bd.questionCommentDeleteSer(ser)>0) {
 			msg="삭제가 완료되었습니다.";
 			url="/board/questionCommentForm?num="+num;
 		} else {

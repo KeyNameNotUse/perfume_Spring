@@ -112,7 +112,8 @@ public class BoardMybatis {
 		return sqlSession.selectOne(NS+"questionOne",num);
 	}
 	public int questionDelete(int num) {
-		return sqlSession.delete(NS + "questionDelete", num);
+		sqlSession.insert(NS + "questionCommentDeleteNum", num);
+		return sqlSession.insert(NS + "questionDelete", num);
 	}
 	public List<Question> questionListAdmin(int pageInt, int limit) {
 		Map map = new HashMap();
@@ -140,8 +141,8 @@ public class BoardMybatis {
 	public List<QuestionComment> questioncommentOne() {
 		return sqlSession.selectList(NS+"questioncommentOne");
 	}
-	public int questionCommentDelete(int ser) {
-		return sqlSession.delete(NS + "questionCommentDelete" , ser);
+	public int questionCommentDeleteSer(int ser) {
+		return sqlSession.delete(NS + "questionCommentDeleteSer" , ser);
 	}
 
 

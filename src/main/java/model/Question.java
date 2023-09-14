@@ -10,7 +10,6 @@ public class Question {
 	private String quetitle; //문의글 제목
 	private String quecontent; //문의글 내용
 	private String queimage; //첨부 이미지
-	private int queanswer; //답변 유무 (1:유 2:무)
 	private Date regdate; // 문의글 작성 날짜
 	
 	/*
@@ -21,7 +20,6 @@ quesubject varchar(50),
 quetitle varchar(100),
 quecontent varchar(2000),
 queimage varchar(300),
-queanswer int,
 regdate date);
 create sequence questionseq;
 	
@@ -62,12 +60,6 @@ create sequence questionseq;
 	public void setQueimage(String queimage) {
 		this.queimage = queimage;
 	}
-	public int getQueanswer() {
-		return queanswer;
-	}
-	public void setQueanswer(int queanswer) {
-		this.queanswer = queanswer;
-	}
 	public Date getRegdate() {
 		return regdate;
 	}
@@ -77,7 +69,7 @@ create sequence questionseq;
 	@Override
 	public String toString() {
 		return "Question [num=" + num + ", id=" + id + ", quesubject=" + quesubject + ", quetitle=" + quetitle
-				+ ", quecontent=" + quecontent + ", queimage=" + queimage + ", queanswer=" + queanswer + ", regdate="
+				+ ", quecontent=" + quecontent + ", queimage=" + queimage + ", regdate="
 				+ regdate + "]";
 	}
 	

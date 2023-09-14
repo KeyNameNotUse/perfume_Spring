@@ -106,7 +106,7 @@
 	<insert id="insertQuestion" parameterType="question">
 		insert into question values
 		(questionseq.nextval,#{id},#{quesubject},#{quetitle},#{quecontent},#{queimage,
-		jdbcType=VARCHAR},#{queanswer},sysdate)
+		jdbcType=VARCHAR},sysdate)
 	</insert>
 	<select id="questionListById" parameterType="String" resultType="question">                                 
 		select * from question where id = #{id} order by regdate desc
